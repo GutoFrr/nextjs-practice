@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb'
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import MeetupList from '../components/MeetupList'
 
@@ -22,7 +22,7 @@ const Home: NextPage<IMeetupsProps> = ({ meetups }) => {
 
 export default Home
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   // fetch data from an API
 
   const client = await MongoClient.connect(process.env.MONGO_URL)

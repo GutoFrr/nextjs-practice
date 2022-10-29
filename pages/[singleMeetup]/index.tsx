@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb'
-import { NextPage, NextPageContext } from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
 import MeetupDetail from '../../components/MeetupDetail'
 
@@ -34,11 +34,11 @@ const SingleMeetup: NextPage<ISingleMeetupProps> = ({ meetupData }) => {
 
 export default SingleMeetup
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const client = await MongoClient.connect(process.env.MONGO_URL)
   const db = client.db()
 
-  const meetupsCollection = db.collection('dummy-meetups')
+  const meetupsCollection: any = db.collection('dummy-meetups')
 
   const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray()
 
@@ -52,7 +52,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async (context: any) => {
   const singleMeetup = context.params.singleMeetup
 
   const client = await MongoClient.connect(process.env.MONGO_URL)
