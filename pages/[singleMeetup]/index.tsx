@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb'
-import { GetStaticPaths, GetStaticProps, NextPage, NextPageContext } from 'next'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import MeetupDetail from '../../components/MeetupDetail'
 
