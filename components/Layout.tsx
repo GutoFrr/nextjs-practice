@@ -10,7 +10,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
     <>
       <div className="bg-teal-700">
         <header className="container mx-auto flex justify-between items-center py-3 text-white font-semibold">
-          <h1 className="text-xl cursor-pointer hover:text-teal-100">
+          <h1 className="text-2xl cursor-pointer hover:text-teal-100">
             Dummy Meetups
           </h1>
           <nav className="flex gap-3">
