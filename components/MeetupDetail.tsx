@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 interface IMeetupDetailProps {
   image: string
   address: string
@@ -9,11 +11,11 @@ const MeetupDetail: React.FC<IMeetupDetailProps> = ({
   image,
   address,
   description,
-  title
+  title,
 }) => {
   return (
     <div className="p-8 bg-slate-100 shadow-lg rounded-md">
-      <img src={image} alt={title} className="w-96" />
+      <Image src={image} alt={title} width={384} height={512} />
       <div>
         <h1 className="font-semibold text-lg">{title}</h1>
         <address>{address}</address>

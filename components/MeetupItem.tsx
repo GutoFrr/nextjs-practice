@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 interface IMeetupItem {
@@ -15,7 +16,7 @@ const MeetupItem: React.FC<IMeetupItem> = ({ title, image, address, id }) => {
 
   return (
     <div className="p-8 bg-slate-100 rounded-md shadow-lg">
-      <img src={image} alt={title} className="w-96" />
+      <Image src={image} alt={title} width={384} height={512} />
       <div className="flex flex-col">
         <h3 className="font-semibold text-lg">{title}</h3>
         <address className="mb-2">{address}</address>
