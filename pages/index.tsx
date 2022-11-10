@@ -40,8 +40,9 @@ export const getStaticProps: GetStaticProps = async () => {
         address: meetup.address,
         image: meetup.image,
         description: meetup.description,
-        id: meetup._id.toString()
-      }))
-    }
+        id: meetup._id.toString(),
+      })),
+    },
+    revalidate: 10,
   }
 }

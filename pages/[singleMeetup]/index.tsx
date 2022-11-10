@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb'
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import MeetupDetail from '../../components/MeetupDetail'
 
@@ -34,25 +34,25 @@ const SingleMeetup: NextPage<ISingleMeetupProps> = ({ meetupData }) => {
 
 export default SingleMeetup
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const client = await MongoClient.connect(process.env.MONGO_URL)
-  const db = client.db()
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const client = await MongoClient.connect(process.env.MONGO_URL)
+//   const db = client.db()
 
-  const meetupsCollection: any = db.collection('dummy-meetups')
+//   const meetupsCollection: any = db.collection('dummy-meetups')
 
-  const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray()
+//   const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray()
 
-  client.close()
+//   client.close()
 
-  return {
-    fallback: 'blocking',
-    paths: meetups.map((meetup: any) => ({
-      params: { singleMeetup: meetup._id.toString() },
-    })),
-  }
-}
+//   return {
+//     fallback: 'blocking',
+//     paths: meetups.map((meetup: any) => ({
+//       params: { singleMeetup: meetup._id.toString() },
+//     })),
+//   }
+// }
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const singleMeetup = context.params.singleMeetup
 
   const client = await MongoClient.connect(process.env.MONGO_URL)
@@ -76,6 +76,5 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         description: selectedMeetup?.description,
       },
     },
-    revalidate: 10,
   }
 }
