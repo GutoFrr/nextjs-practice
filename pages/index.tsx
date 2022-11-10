@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb'
-import type { GetStaticProps, NextPage } from 'next'
+import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import MeetupList from '../components/MeetupList'
 
@@ -22,7 +22,7 @@ const Home: NextPage<IMeetupsProps> = ({ meetups }) => {
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   // fetch data from an API
 
   const client = await MongoClient.connect(process.env.MONGO_URL)
@@ -43,6 +43,5 @@ export const getStaticProps: GetStaticProps = async () => {
         id: meetup._id.toString(),
       })),
     },
-    revalidate: 10,
   }
 }
