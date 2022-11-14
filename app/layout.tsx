@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import '../styles/globals.css'
 
 interface ILayoutProps {
   children: ReactNode
@@ -17,10 +18,10 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
           </Link>
           <nav className="flex gap-3">
             <Link href="/">
-              <a className="hover:text-teal-100">All Memes</a>
+              <h2 className="hover:text-teal-100">All Memes</h2>
             </Link>
             <Link href="/new-meetup">
-              <a className="hover:text-teal-100">Add New Meme</a>
+              <h2 className="hover:text-teal-100">Add New Meme</h2>
             </Link>
           </nav>
         </header>
