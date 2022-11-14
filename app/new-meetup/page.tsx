@@ -1,10 +1,9 @@
 'use client'
 
-import { NextPage } from 'next'
 import { useRouter } from 'next/navigation'
 import NewMeetupForm from './NewMeetupForm'
 
-const NewMeetup: NextPage = () => {
+const NewMeetup = () => {
   const router = useRouter()
 
   const addMeetupHandler = async (enteredMeetupData: object) => {
