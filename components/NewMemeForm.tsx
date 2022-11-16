@@ -1,10 +1,10 @@
 import { SyntheticEvent, useRef } from 'react'
 
-interface INewMeetupFormProps {
-  onAddMeetup: ({}) => void
+interface INewMemeFormProps {
+  onAddMeme: ({}) => void
 }
 
-const NewMeetupForm: React.FC<INewMeetupFormProps> = ({ onAddMeetup }) => {
+const NewMemeForm: React.FC<INewMemeFormProps> = ({ onAddMeme }) => {
   const titleInputRef = useRef<any>()
   const imageInputRef = useRef<any>()
   const addressInputRef = useRef<any>()
@@ -18,22 +18,22 @@ const NewMeetupForm: React.FC<INewMeetupFormProps> = ({ onAddMeetup }) => {
     const enteredAddress = addressInputRef.current.value
     const enteredDescription = descriptionInputRef.current.value
 
-    const meetupData = {
+    const memeData = {
       title: enteredTitle,
       image: enteredImage,
       address: enteredAddress,
       description: enteredDescription
     }
 
-    onAddMeetup(meetupData)
+    onAddMeme(memeData)
   }
 
   return (
     <div className="px-64 my-6">
-      <h1 className="text-4xl text-center font-bold mb-4">New Meetup</h1>
+      <h1 className="text-4xl text-center font-bold mb-4">New Meme</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-slate-100 p-8 rounded-lg shadow-lg">
         <section className="form-control">
-          <label htmlFor="title">Meetup Title</label>
+          <label htmlFor="title">Meme Title</label>
           <input
             type="text"
             required
@@ -43,7 +43,7 @@ const NewMeetupForm: React.FC<INewMeetupFormProps> = ({ onAddMeetup }) => {
           />
         </section>
         <section className="form-control">
-          <label htmlFor="image">Meetup Image</label>
+          <label htmlFor="image">Meme Image</label>
           <input
             type="url"
             required
@@ -53,7 +53,7 @@ const NewMeetupForm: React.FC<INewMeetupFormProps> = ({ onAddMeetup }) => {
           />
         </section>
         <section className="form-control">
-          <label htmlFor="address">Meetup Address</label>
+          <label htmlFor="address">Meme Address</label>
           <input
             type="text"
             required
@@ -63,7 +63,7 @@ const NewMeetupForm: React.FC<INewMeetupFormProps> = ({ onAddMeetup }) => {
           />
         </section>
         <section className="form-control">
-          <label htmlFor="description">Meetup Description</label>
+          <label htmlFor="description">Meme Description</label>
           <textarea
             required
             id="description"
@@ -76,11 +76,11 @@ const NewMeetupForm: React.FC<INewMeetupFormProps> = ({ onAddMeetup }) => {
           type="submit"
           className="bg-teal-700 text-white font-medium py-1.5 rounded shadow-md transition duration-300 hover:brightness-90 hover:shadow-lg hover:shadow-zinc-50"
         >
-          Add Meetup
+          Add Meme
         </button>
       </form>
     </div>
   )
 }
 
-export default NewMeetupForm
+export default NewMemeForm

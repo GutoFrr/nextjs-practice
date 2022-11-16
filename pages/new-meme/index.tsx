@@ -1,14 +1,30 @@
 import Link from 'next/link'
-import { ReactNode } from 'react'
-import '../styles/globals.css'
+import { useRouter } from 'next/navigation'
+import NewMemeForm from '../../components/NewMemeForm'
+import '../../styles/globals.css'
 
-interface ILayoutProps {
-  children: ReactNode
-}
+const NewMeme = () => {
+  const router = useRouter()
 
-const Layout: React.FC<ILayoutProps> = ({ children }) => {
+  const addMemeHandler = async (enteredMemeData: object) => {
+    const res = await fetch('/api/new-meme', {
+      method: 'POST',
+      body: JSON.stringify(enteredMemeData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const data = await res.json()
+
+    console.log(data)
+
+    router.push('/')
+  }
+
   return (
     <>
+      <title>Add a New Meetup</title>
       <div className="bg-teal-700 shadow-md fixed top-0 w-screen z-10">
         <header className="container mx-auto flex justify-between items-center py-3 text-white font-semibold">
           <Link
@@ -27,9 +43,12 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
           </nav>
         </header>
       </div>
-      <main className="container mx-auto py-14">{children}</main>
+
+      <div className="pt-14">
+        <NewMemeForm onAddMeme={addMemeHandler} />
+      </div>
     </>
   )
 }
 
-export default Layout
+export default NewMeme

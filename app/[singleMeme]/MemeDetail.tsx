@@ -1,13 +1,13 @@
 import Image from 'next/image'
 
-interface IMeetupDetailProps {
+interface IMemeDetailProps {
   image: string
   address: string
   description: string
   title: string
 }
 
-const MeetupDetail: React.FC<IMeetupDetailProps> = ({
+const MemeDetail: React.FC<IMemeDetailProps> = ({
   image,
   address,
   description,
@@ -25,4 +25,4 @@ const MeetupDetail: React.FC<IMeetupDetailProps> = ({
   )
 }
 
-export default MeetupDetail
+export default MemeDetail

@@ -1,40 +1,33 @@
 import { MongoClient } from 'mongodb'
-import MeetupList from './MeetupList'
+import MemeList from './MemeList'
 
-export const dynamic = 'auto',
-  dynamicParams = true,
-  revalidate = 0,
-  fetchCache = 'auto',
-  runtime = 'nodejs',
-  preferredRegion = 'auto'
-
-const getMeetups = async () => {
+const getMemes = async () => {
   const client = await MongoClient.connect(process.env.MONGO_URL)
   const db = client.db()
 
-  const meetupsCollection = db.collection('dummy-meetups')
-  const meetups = await meetupsCollection.find().toArray()
+  const memesCollection = db.collection('randomemes')
+  const memes = await memesCollection.find().toArray()
 
   client.close()
 
-  return meetups.map((meetup) => ({
-    title: meetup.title,
-    address: meetup.address,
-    image: meetup.image,
-    description: meetup.description,
-    id: meetup._id.toString(),
+  return memes.map((meme) => ({
+    title: meme.title,
+    address: meme.address,
+    image: meme.image,
+    description: meme.description,
+    id: meme._id.toString(),
   }))
 }
 
 const Home = async () => {
-  const data = await getMeetups()
+  const data = await getMemes()
 
   return (
     <>
-      <title>Dummy Meetups</title>
+      <title>RandoMemes</title>
       <meta name="description" content="Browse a list of React meetups" />
 
-      <MeetupList meetups={data} />
+      <MemeList memes={data} />
     </>
   )
 }

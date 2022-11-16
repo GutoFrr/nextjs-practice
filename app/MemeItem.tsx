@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface IMeetupItem {
+interface IMemeItem {
   id: string
   title: string
   image: string
   address: string
 }
 
-const MeetupItem: React.FC<IMeetupItem> = ({ title, image, address, id }) => {
+const MemeItem: React.FC<IMemeItem> = ({ title, image, address, id }) => {
   return (
     <div className="p-8 bg-slate-100 rounded-md shadow-lg">
       <Image src={image} alt={title} width={384} height={512} />
@@ -25,4 +25,4 @@ const MeetupItem: React.FC<IMeetupItem> = ({ title, image, address, id }) => {
   )
 }
 
-export default MeetupItem
+export default MemeItem

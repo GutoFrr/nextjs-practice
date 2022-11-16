@@ -1,23 +1,23 @@
 import { MongoClient } from 'mongodb'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-const NewMeetup = async (req: NextApiRequest, res: NextApiResponse) => {
+const NewMeme = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const data = req.body
 
     const client = await MongoClient.connect(process.env.MONGO_URL)
     const db = client.db()
 
-    const meetupsCollection = db.collection('dummy-meetups')
+    const memesCollection = db.collection('randomemes')
 
-    const result = await meetupsCollection.insertOne(data)
+    const result = await memesCollection.insertOne(data)
 
     console.log(result)
 
     client.close()
 
-    res.status(201).json({ message: 'Meetup inserted!' })
+    res.status(201).json({ message: 'Meme inserted!' })
   }
 }
 
-export default NewMeetup
+export default NewMeme
