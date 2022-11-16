@@ -1,13 +1,12 @@
-'use client'
-
 import { useRouter } from 'next/navigation'
-import NewMeetupForm from './NewMeetupForm'
+import NewMeetupForm from '../../components/NewMeetupForm'
+import '../../styles/globals.css'
 
 const NewMeetup = () => {
   const router = useRouter()
 
   const addMeetupHandler = async (enteredMeetupData: object) => {
-    const res = await fetch('/pages/api/new-meetup', {
+    const res = await fetch('/api/new-meetup', {
       method: 'POST',
       body: JSON.stringify(enteredMeetupData),
       headers: {

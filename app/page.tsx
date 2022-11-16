@@ -1,6 +1,13 @@
 import { MongoClient } from 'mongodb'
 import MeetupList from './MeetupList'
 
+export const dynamic = 'auto',
+  dynamicParams = true,
+  revalidate = 0,
+  fetchCache = 'auto',
+  runtime = 'nodejs',
+  preferredRegion = 'auto'
+
 const getMeetups = async () => {
   const client = await MongoClient.connect(process.env.MONGO_URL)
   const db = client.db()

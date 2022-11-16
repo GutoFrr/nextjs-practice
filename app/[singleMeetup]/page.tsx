@@ -24,10 +24,11 @@ const getSingleMeetup = async (meetupId: any) => {
 
 const SingleMeetup = async ({ params }: any) => {
   const data = await getSingleMeetup(params.singleMeetup)
+  const title = `Dummy Meetup | ${data.title}`
 
   return (
     <>
-      <title>{data.title}</title>
+      <title>{title}</title>
 
       <div className="container mx-auto my-6 flex flex-col items-center">
         <MeetupDetail

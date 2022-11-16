@@ -14,13 +14,13 @@ const MeetupDetail: React.FC<IMeetupDetailProps> = ({
   title,
 }) => {
   return (
-    <div className="p-8 bg-slate-100 shadow-lg rounded-md">
+    <div className="max-w-[448px] p-8 bg-slate-100 shadow-lg rounded-md">
       <Image src={image} alt={title} width={384} height={512} />
-      <div>
+      <>
         <h1 className="font-semibold text-lg">{title}</h1>
         <address>{address}</address>
         <p>{description}</p>
-      </div>
+      </>
     </div>
   )
 }

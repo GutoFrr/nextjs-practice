@@ -16,8 +16,8 @@ const MeetupItem: React.FC<IMeetupItem> = ({ title, image, address, id }) => {
         <h3 className="font-semibold text-lg">{title}</h3>
         <address className="mb-2">{address}</address>
         <Link href={`/${id}`}>
-          <button className="bg-teal-700 text-white font-medium py-1.5 rounded shadow-md transition duration-300 hover:brightness-90 hover:shadow-lg hover:shadow-zinc-50">
-            Show Details
+          <button className="w-full bg-teal-700 text-white font-medium py-1.5 rounded shadow-md transition duration-300 hover:brightness-90 hover:shadow-lg hover:shadow-zinc-50">
+            Show details
           </button>
         </Link>
       </div>

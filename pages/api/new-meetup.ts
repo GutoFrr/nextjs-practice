@@ -1,10 +1,7 @@
 import { MongoClient } from 'mongodb'
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 
-const HandleNewMeetup: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const NewMeetup = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const data = req.body
 
@@ -23,4 +20,4 @@ const HandleNewMeetup: NextApiHandler = async (
   }
 }
 
-export default HandleNewMeetup
+export default NewMeetup
