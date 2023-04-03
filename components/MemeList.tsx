@@ -1,19 +1,19 @@
-import MemeItem from './MemeItem'
+import MemeItem from './MemeItem';
 
-interface IMemeList {
+interface MemeList {
   memes: {
-    title: string
-    address: string
-    image: string
-    description: string
-    id: string
-  }[]
+    title: string;
+    address: string;
+    image: string;
+    description: string;
+    id: string;
+  }[];
 }
 
-const MemeList: React.FC<IMemeList> = ({ memes }) => {
+export default function MemeList({ memes }: MemeList) {
   return (
     <div className="container mx-auto flex flex-col items-center gap-6 my-6">
-      {memes.map((meme: any) => (
+      {memes.map((meme) => (
         <MemeItem
           key={meme.id}
           id={meme.id}
@@ -23,7 +23,5 @@ const MemeList: React.FC<IMemeList> = ({ memes }) => {
         />
       ))}
     </div>
-  )
+  );
 }
-
-export default MemeList

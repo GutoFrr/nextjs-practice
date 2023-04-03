@@ -1,14 +1,27 @@
-import { MongoClient } from 'mongodb'
-import MemeList from './MemeList'
+import { MongoClient } from 'mongodb';
+import MemeList from '../components/MemeList';
+import { notFound } from 'next/navigation';
 
-const getMemes = async () => {
-  const client = await MongoClient.connect(process.env.MONGO_URL)
-  const db = client.db()
+export default async function Home() {
+  const data = await getMemes();
 
-  const memesCollection = db.collection('randomemes')
-  const memes = await memesCollection.find().toArray()
+  if (!data) {
+    notFound();
+  }
 
-  client.close()
+  return <MemeList memes={data} />;
+}
+
+async function getMemes() {
+  const client = await MongoClient.connect(process.env.MONGO_URL);
+  const db = client.db();
+
+  const memesCollection = db.collection('randomemes');
+  const memes = await memesCollection.find().toArray();
+
+  console.log(memes);
+
+  client.close();
 
   return memes.map((meme) => ({
     title: meme.title,
@@ -16,20 +29,5 @@ const getMemes = async () => {
     image: meme.image,
     description: meme.description,
     id: meme._id.toString(),
-  }))
+  }));
 }
-
-const Home = async () => {
-  const data = await getMemes()
-
-  return (
-    <>
-      <title>RandoMemes</title>
-      <meta name="description" content="Browse a list of React meetups" />
-
-      <MemeList memes={data} />
-    </>
-  )
-}
-
-export default Home

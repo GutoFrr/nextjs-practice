@@ -1,30 +1,13 @@
-import { MongoClient, ObjectId } from 'mongodb'
-import MemeDetail from './MemeDetail'
+import { MongoClient, ObjectId, WithId } from 'mongodb';
+import MemeDetail from '../../components/MemeDetail';
 
-const getSingleMeme = async (memeId: any) => {
-  const client = await MongoClient.connect(process.env.MONGO_URL)
-  const db = client.db()
-
-  const memesCollection = db.collection('randomemes')
-
-  const selectedMeme = await memesCollection.findOne({
-    _id: new ObjectId(memeId),
-  })
-
-  client.close()
-
-  return {
-    id: selectedMeme?._id.toString(),
-    title: selectedMeme?.title,
-    address: selectedMeme?.address,
-    image: selectedMeme?.image,
-    description: selectedMeme?.description,
-  }
+interface SingleMemeProps {
+  params: { singleMeme: string };
 }
 
-const SingleMeme = async ({ params }: any) => {
-  const data = await getSingleMeme(params.singleMeme)
-  const title = `Dummy Meetup | ${data.title}`
+export default async function SingleMeme({ params }: SingleMemeProps) {
+  const data = await getSingleMeme(params.singleMeme);
+  const title = `Dummy Meetup | ${data.title}`;
 
   return (
     <>
@@ -39,7 +22,26 @@ const SingleMeme = async ({ params }: any) => {
         />
       </div>
     </>
-  )
+  );
 }
 
-export default SingleMeme
+async function getSingleMeme(memeId: string) {
+  const client = await MongoClient.connect(process.env.MONGO_URL);
+  const db = client.db();
+
+  const memesCollection = db.collection('randomemes');
+
+  const meme: any = await memesCollection.findOne({
+    _id: new ObjectId(memeId),
+  });
+
+  client.close();
+
+  return {
+    id: meme._id.toString(),
+    title: meme.title,
+    address: meme.address,
+    image: meme.image,
+    description: meme.description,
+  };
+}

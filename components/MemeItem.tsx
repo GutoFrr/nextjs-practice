@@ -1,17 +1,17 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'next/image';
+import Link from 'next/link';
 
-interface IMemeItem {
-  id: string
-  title: string
-  image: string
-  address: string
+interface MemeItem {
+  id: string;
+  title: string;
+  image: string;
+  address: string;
 }
 
-const MemeItem: React.FC<IMemeItem> = ({ title, image, address, id }) => {
+export default function MemeItem({ title, image, address, id }: MemeItem) {
   return (
     <div className="p-8 bg-slate-100 rounded-md shadow-lg">
-      <Image src={image} alt={title} width={384} height={512} />
+      <Image src={image} alt={title} width={384} height={512} priority />
       <div className="flex flex-col">
         <h3 className="font-semibold text-lg">{title}</h3>
         <address className="mb-2">{address}</address>
@@ -22,7 +22,5 @@ const MemeItem: React.FC<IMemeItem> = ({ title, image, address, id }) => {
         </Link>
       </div>
     </div>
-  )
+  );
 }
-
-export default MemeItem
