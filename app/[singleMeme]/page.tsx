@@ -1,27 +1,32 @@
-import { MongoClient, ObjectId, WithId } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import MemeDetail from '../../components/MemeDetail';
+import { Metadata } from 'next';
 
-interface SingleMemeProps {
+interface Props {
   params: { singleMeme: string };
 }
 
-export default async function SingleMeme({ params }: SingleMemeProps) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getSingleMeme(params.singleMeme);
-  const title = `Dummy Meetup | ${data.title}`;
+  const title = `Randomemes | ${data.title}`;
+
+  return {
+    title: title,
+  };
+}
+
+export default async function SingleMeme({ params }: Props) {
+  const data = await getSingleMeme(params.singleMeme);
 
   return (
-    <>
-      <title>{title}</title>
-
-      <div className="container mx-auto my-6 flex flex-col items-center">
-        <MemeDetail
-          image={data.image}
-          title={data.title}
-          address={data.address}
-          description={data.description}
-        />
-      </div>
-    </>
+    <div className="container mx-auto my-6 flex flex-col items-center">
+      <MemeDetail
+        image={data.image}
+        title={data.title}
+        address={data.address}
+        description={data.description}
+      />
+    </div>
   );
 }
 

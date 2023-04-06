@@ -1,7 +1,7 @@
 import { clientRequest } from './makeRequest';
 
 export function postMeme(data: object) {
-  return clientRequest('/new-meme/api', {
+  return clientRequest('/api/new-meme', {
     method: 'POST',
     data,
   });
