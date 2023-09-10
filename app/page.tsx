@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 import MemeList from '../components/MemeList';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 10;
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const data = await getMemes();
