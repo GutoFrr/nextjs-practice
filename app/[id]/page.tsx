@@ -1,22 +1,14 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import MemeDetail from '../../components/MemeDetail';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 interface Props {
-  params: { singleMeme: string };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSingleMeme(params.singleMeme);
-  const title = `Randomemes | ${data.title}`;
-
-  return {
-    title: title,
-  };
+  params: { id: string };
 }
 
 export default async function SingleMeme({ params }: Props) {
-  const data = await getSingleMeme(params.singleMeme);
+  const data = await getSingleMeme(params.id);
 
   return (
     <div className="container mx-auto my-6 flex flex-col items-center">
@@ -36,11 +28,15 @@ async function getSingleMeme(memeId: string) {
 
   const memesCollection = db.collection('randomemes');
 
-  const meme: any = await memesCollection.findOne({
+  const meme = await memesCollection.findOne({
     _id: new ObjectId(memeId),
   });
 
   client.close();
+
+  if (!meme) {
+    return notFound();
+  }
 
   return {
     id: meme._id.toString(),
@@ -48,5 +44,14 @@ async function getSingleMeme(memeId: string) {
     address: meme.address,
     image: meme.image,
     description: meme.description,
+  };
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const data = await getSingleMeme(params.id);
+  const title = `Randomemes | ${data.title}`;
+
+  return {
+    title: title,
   };
 }

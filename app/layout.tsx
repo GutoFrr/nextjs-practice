@@ -4,7 +4,7 @@ import '../styles/globals.css';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  description: 'Browse a list of React memes',
+  description: 'Browse and post to list of memes. Back-end by a simple Next.js Rest API.',
   title: 'RandoMemes',
 };
 interface LayoutProps {

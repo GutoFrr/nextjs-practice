@@ -19,9 +19,7 @@ async function getMemes() {
   const memesCollection = db.collection('randomemes');
   const memes = await memesCollection.find().toArray();
 
-  console.log(memes);
-
-  client.close();
+  await client.close();
 
   return memes.map((meme) => ({
     title: meme.title,
