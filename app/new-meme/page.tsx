@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function NewMeme() {
   return (
     <>
-      <h1 className="text-4xl text-center font-bold mb-4">New Meme</h1>
+      <h1 className="text-4xl text-center font-bold my-4">New Meme</h1>
       <NewMemeForm />
     </>
   );

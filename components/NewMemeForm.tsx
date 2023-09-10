@@ -3,12 +3,15 @@
 import { FormEvent } from 'react';
 import { postMeme } from '../services/meme';
 import FormRow from './FormRow';
+import { useRouter } from 'next/navigation';
 
 interface EventHandler extends FormEvent<HTMLFormElement> {
   target: HTMLFormElement;
 }
 
 export default function NewMemeForm() {
+  const router = useRouter();
+
   async function handleSubmit(e: EventHandler) {
     e.preventDefault();
     try {
@@ -18,6 +21,8 @@ export default function NewMemeForm() {
       console.log(data);
 
       await postMeme(data);
+
+      router.push('/');
     } catch (error) {
       console.log(error);
     }

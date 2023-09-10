@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default async function SingleMeme({ params }: Props) {
-  const data = await getSingleMeme(params.id);
+  const data = await getMeme(params.id);
 
   return (
     <div className="container mx-auto my-6 flex flex-col items-center">
@@ -22,14 +22,14 @@ export default async function SingleMeme({ params }: Props) {
   );
 }
 
-async function getSingleMeme(memeId: string) {
+async function getMeme(id: string) {
   const client = await MongoClient.connect(process.env.MONGO_URL);
   const db = client.db();
 
   const memesCollection = db.collection('randomemes');
 
   const meme = await memesCollection.findOne({
-    _id: new ObjectId(memeId),
+    _id: new ObjectId(id),
   });
 
   client.close();
@@ -48,7 +48,7 @@ async function getSingleMeme(memeId: string) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getSingleMeme(params.id);
+  const data = await getMeme(params.id);
   const title = `Randomemes | ${data.title}`;
 
   return {

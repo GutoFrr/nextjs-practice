@@ -17,7 +17,7 @@ export default function MemeItem({ title, image, address, id }: MemeItem) {
         <address className="mb-2">{address}</address>
         <Link
           href={`/${id}`}
-          className="w-full bg-teal-700 text-white font-medium py-1.5 rounded shadow-md transition duration-300 hover:brightness-90 hover:shadow-lg hover:shadow-zinc-50"
+          className="w-full grid place-items-center bg-teal-700 text-white font-medium py-1.5 rounded shadow-md transition duration-300 hover:brightness-90 hover:shadow-lg hover:shadow-zinc-50"
         >
           Show details
         </Link>
